@@ -8,13 +8,13 @@ const React = require('react');
  * @param {{}} replacementValues
  * @returns {string}
  */
-function replaceTokens(messageTemplate, replacementValues) {
+function replaceTokens(messageTemplate,replacementValues, defaultReplacementValues) {
     return messageTemplate.replace(/\{\{[^}]+}}/g, (token) => {
         const matches = token.match(/\{\{\s*(\S+)\s*}}/);
 
         if (matches) {
             const valueId = matches[1];
-            return replacementValues[valueId] || '';
+            return replacementValues[valueId] || defaultReplacementValues[valueId] || '';
         }
 
         return '';
@@ -53,15 +53,20 @@ class LocalizeTextProvider extends React.Component {
     localizeText(messageId, replacementValues, defaultMessage) {
         if (messageId in this.props.messages) {
             const messageTemplate = this.props.messages[messageId];
-            return replaceTokens(messageTemplate, replacementValues);
+            return replaceTokens(messageTemplate, replacementValues, this.props.defaultReplacementValues);
         }
 
-        return defaultMessage || '';
+        if (defaultMessage) {
+            return replaceTokens(defaultMessage, replacementValues, this.props.defaultReplacementValues);
+        }
+
+        return '';
     }
 }
 
 LocalizeTextProvider.propTypes = {
     messages: React.PropTypes.objectOf(React.PropTypes.string).isRequired,
+    defaultReplacementValues: {}
 };
 
 LocalizeTextProvider.defaultProps = {
