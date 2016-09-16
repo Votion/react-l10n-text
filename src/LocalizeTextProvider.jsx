@@ -66,11 +66,12 @@ class LocalizeTextProvider extends React.Component {
 
 LocalizeTextProvider.propTypes = {
     messages: React.PropTypes.objectOf(React.PropTypes.string).isRequired,
-    defaultReplacementValues: {}
+    defaultReplacementValues: React.PropTypes.object
 };
 
 LocalizeTextProvider.defaultProps = {
-    messages: {}
+    messages: {},
+    defaultReplacementValues: {}
 };
 
 LocalizeTextProvider.childContextTypes = {
