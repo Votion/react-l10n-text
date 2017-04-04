@@ -29,7 +29,7 @@ LocalizeText.propTypes = {
     id: React.PropTypes.string.isRequired,
     defaultMessage: React.PropTypes.string,
     description: React.PropTypes.string,
-    values: React.PropTypes.objectOf(React.PropTypes.string)
+    values: React.PropTypes.objectOf(React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]))
 };
 
 LocalizeText.defaultProps = {

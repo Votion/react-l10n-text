@@ -1,6 +1,6 @@
 {
   "name": "react-l10n-text",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A simple React provider and component for inserting translated messages",
   "main": "./lib/index.js",
   "scripts": {
